@@ -1,0 +1,28 @@
+---
+- name: upgrade all packages
+  yum:
+    name: '*'
+    state: latest
+
+- name: install telnet
+  yum:
+    name: telnet
+    state: present
+
+- name: install yum packages
+  yum: name={{ item }} state=present update_cache=yes
+  with_items:
+    - git
+    - gcc
+    - libffi-devel
+    - python-devel
+    - openssl-devel
+    - php56
+    - php56-mysqlnd
+    - mysql55
+    - python-pip
+
+- name: install credstash
+  pip:
+    name: credstash
+    state: latest
