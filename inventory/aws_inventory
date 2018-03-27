@@ -1,0 +1,8 @@
+[tag_source_name]
+
+
+[devgroup:children]
+tag_source_name
+
+[devgroup:vars]
+ansible_user=ec2-user
