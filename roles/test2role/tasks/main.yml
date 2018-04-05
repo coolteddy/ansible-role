@@ -1,2 +1,21 @@
 ---
 # tasks file for test2role
+
+- name: install tanium if not install
+  shell: TANIUM_TAGS='{{ group }},{{ t_en }}' rpm -ivh /tmp/{{ package }}
+  when: is_installed.rc != 0
+  notify:
+    - start tanium client
+
+- debug:
+    msg: "++++++group {{ group }} ++++++ env {{ env }}"
+
+
+- name: install tanium if not install
+  command: rpm -ivh /tmp/{{ package }}
+  environment:
+    TANIUM_TAGS: "{{ group }},{{ env }}"
+  args:
+    warn: no
+  # when: is_installed.rc != 0 and ansible_distribution == 'CentOS'
+  when: is_installed.rc != 0 
